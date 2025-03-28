@@ -3,6 +3,7 @@ from django.urls import path
 import main.views as views
 
 category = [
+    path("category/list", views.list_category),
     path("category/create/", views.create_category)
 ]
 
