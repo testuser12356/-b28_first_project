@@ -1,0 +1,72 @@
+{% extends "../base.html" %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<br><br>
+<div class="row">
+    <div class="col-12 col-md-3 border-end">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item list-group-item-action">
+                <a class="text-decoration-none text-dark"
+                   href="/category/create/">Category Create</a>
+            </li>
+            <li class="list-group-item list-group-item-action">
+                <a class="text-decoration-none text-dark"
+                   href="/category/list">Category list</a>
+            </li>
+            <li class="list-group-item list-group-item-action">
+                <a class="text-decoration-none text-dark"
+                   href="/news/create/">News Create</a>
+            </li>
+            <li class="list-group-item list-group-item-action">
+                <a class="text-decoration-none text-dark"
+                   href="/news/list">News List</a>
+            </li>
+        </ul>
+    </div>
+    <div class="col-12 col-md-9">
+        {% if request.build_absolute_uri == 'http://127.0.0.1:8000/user/profile' %}
+        <div class="card mb-3 p-3">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="{{ user.profile.image.url }}"
+                         class="img-fluid" height="300" alt="...">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h3 class="card-title">{{ user.username|title }}</h3>
+
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item list-group-item-action">
+                                <span class="fw-bold">Full Name</span>: {{ user.get_full_name }}
+                            </li>
+                            <li class="list-group-item list-group-item-action">
+                                <span class="fw-bold">Phone Number</span>: {{ user.profile.phone }}
+                            </li>
+                            <li class="list-group-item list-group-item-action">
+                                <span class="fw-bold">Email</span>: {{ user.email }}
+                            </li>
+                            <li class="list-group-item list-group-item-action">
+                                <span class="fw-bold">Date joined</span>: {{ user.date_joined }}
+                            </li>
+                            <li class="list-group-item list-group-item-action">
+                                <span class="fw-bold">Last login</span>: {{ user.last_login }}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% block profile %}
+
+        {% endblock %}
+    </div>
+</div>
+{% else %}
+<br><br>
+<p class="text-center">
+    Sizda ruxsat yoq iltimos <a href="/auth/login">login</a> bo'ling
+</p>
+{% endif %}
+{% endblock content %}

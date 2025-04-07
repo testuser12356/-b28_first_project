@@ -1,25 +1,28 @@
 {% extends "user/profile.html" %}
-
 {% block profile %}
-<h4>Category list</h4>
+<h4>News list</h4>
 <table class="table">
     <thead>
     <tr>
         <th scope="col">#</th>
-        <th scope="col">Name</th>
-        <th scope="col">Order num</th>
-        <th scope="col">Update</th>
-        <th>Delete</th>
+        <th scope="col">Title</th>
+        <th scope="col">Category</th>
+        <th scope="col">Views</th>
+        <th scope="col">Published At</th>
+        <th scope="col">Update/Delete</th>
     </tr>
     </thead>
     <tbody>
     {% for i in objects_list %}
     <tr>
         <th scope="row">{{ i.id }}</th>
-        <td>{{ i.name }}</td>
-        <td>{{ i.order_num }}</td>
+        <td><a class="text-decoration-none text-dark"
+               href="/news-detail/{{ i.id }}">{{ i.title }}</a></td>
+        <td>{{ i.category.name }}</td>
+        <td>{{ i.views_count }}</td>
+        <td>{{ i.published_at }}</td>
         <td>
-            <a href="/category/update/{{ i.id }}/">
+            <a href="/news/update/{{ i.id }}/" class="text-decoration-none">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                      class="bi bi-pencil-square" viewBox="0 0 16 16">
                     <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
@@ -27,9 +30,9 @@
                           d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
                 </svg>
             </a>
-        </td>
-        <td>
-            <a class="text-danger" data-bs-toggle="modal" data-bs-target="#exampleModal_{{ i.id }}" href="" type="button">
+            |
+            <a class="text-danger" data-bs-toggle="modal" data-bs-target="#exampleModal_{{ i.id }}" href=""
+               type="button">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash"
                      viewBox="0 0 16 16">
                     <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
@@ -40,24 +43,27 @@
     </tr>
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal_{{ i.id }}" tabindex="-1" aria-labelledby="exampleModalLabel_{{ i.id }}" aria-hidden="true">
+    <div class="modal fade" id="exampleModal_{{ i.id }}" tabindex="-1" aria-labelledby="exampleModalLabel_{{ i.id }}"
+         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel_{{ i.id }}">Category Delete</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel_{{ i.id }}">News Delete</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <ul>
                         <li>Id: {{ i.id }}</li>
-                        <li>Name: {{ i.name }}</li>
-                        <li>Order Number: {{ i.order_num }}-chi</li>
+                        <li>Title: {{ i.title }}</li>
+                        <li>Category: {{ i.category.name }}</li>
+                        <li>Views Count: {{ i.views_count }}</li>
+                        <li>Published At: {{ i.published_at }}</li>
                     </ul>
                     <p class="text-warning">O'chib ketgan object qayta tiklash imkoni yoq</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <a href="/category/delete/{{ i.id }}" class="btn btn-danger">Delete</a>
+                    <a href="/news/delete/{{ i.id }}" class="btn btn-danger">Delete</a>
                 </div>
             </div>
         </div>

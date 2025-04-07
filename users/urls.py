@@ -2,8 +2,14 @@ from django.urls import path
 
 import users.views as views
 
-urlpatterns = [
-    path("login/", views.login_user),
-    path("logout/", views.logout_user),
-    path("register/", views.register_user),
+profile = [
+    path("user/profile", views.profile)
 ]
+
+auth = [
+    path("auth/login/", views.login_user),
+    path("auth/logout/", views.logout_user),
+    path("auth/register/", views.register_user)
+]
+
+urlpatterns = profile + auth

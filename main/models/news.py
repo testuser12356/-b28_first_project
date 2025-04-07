@@ -20,7 +20,7 @@ class News(models.Model):
     title = models.CharField(max_length=255)
     subtitle = models.CharField(max_length=500)
     post = models.TextField()
-    published_at = models.DateTimeField()
+    published_at = models.DateTimeField(auto_now_add=True)
     views_count = models.PositiveIntegerField(default=0)
 
     def __str__(self):
